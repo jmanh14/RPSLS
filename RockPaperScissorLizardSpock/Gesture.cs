@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissorLizardSpock
 {
-    class Program
+    public class Gesture
     {
-        static void Main(string[] args)
+        public string move;
+  
+        public Gesture(string move)
         {
-            Game rpsls = new Game();
-            rpsls.Intro();
+            this.move = move;
         }
+        
     }
 }
