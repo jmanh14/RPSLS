@@ -12,12 +12,12 @@ namespace RockPaperScissorLizardSpock
 
         public Computer()
         {
-
+            
         }
 
         public override void ChooseMove()
         {
-             int rnd = new Random().Next(1, 6);
+            int rnd = new Random().Next(1, 6);
             gesture = gestures[rnd - 1].move;
         }
 
