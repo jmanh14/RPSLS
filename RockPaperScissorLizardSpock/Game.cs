@@ -15,9 +15,20 @@ namespace RockPaperScissorLizardSpock
         {
             Console.WriteLine("Would you like to play [1]Single Player or [2]Multiplayer");
             Console.Write(">> ");
-            int choice = int.Parse(Console.ReadLine());
-            Console.Clear();
-            return choice;
+            try
+            {
+                int choice = int.Parse(Console.ReadLine());
+                Console.Clear();
+                return choice;
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input. Try again");
+                Console.Write(">> ");
+                int choice = int.Parse(Console.ReadLine());
+                Console.Clear();
+                return choice;
+            }
         }
       
         private void SetPlayers(int numOfPlayers)
@@ -67,6 +78,7 @@ namespace RockPaperScissorLizardSpock
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Spock vaporizes Rock");
             Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\n\nSelect from the list. Best Of 3! Good Luck!");
             Console.WriteLine("Press enter to continue...");
             Console.ReadLine();
             Console.Clear();
