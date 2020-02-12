@@ -10,19 +10,17 @@ namespace RockPaperScissorLizardSpock
     {
         public string name;
         public List<Gesture> gestures;
-        public Gesture gesture;
-        public int score;
+        public string gesture;
+        public int score = 0;
         public Player()
         {
             score = 0;
             gestures = new List<Gesture>() { new Gesture("Rock"), new Gesture("Paper"), new Gesture("Scissors"), new Gesture("Lizard"), new Gesture("Spock") };
         }
 
-        public virtual string ChooseMove(int move)
-        {          
-            Console.WriteLine($"Player chose {gestures[move-1].move}");
-            return gestures[move - 1].move;
-        }
+        public abstract void ChooseMove();
+        public abstract void GetName();
+       
 
     }
 }

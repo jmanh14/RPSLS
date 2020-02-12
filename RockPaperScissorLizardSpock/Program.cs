@@ -11,7 +11,7 @@ namespace RockPaperScissorLizardSpock
         static void Main(string[] args)
         {
             Game rpsls = new Game();
-            rpsls.Intro();
+            rpsls.PlayGame();
         }
     }
 }

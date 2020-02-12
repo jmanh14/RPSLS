@@ -12,14 +12,18 @@ namespace RockPaperScissorLizardSpock
 
         public Computer()
         {
-            name = "Computer";
+
         }
 
-        public override string ChooseMove(int move)
+        public override void ChooseMove()
         {
              int rnd = new Random().Next(1, 6);
-            Console.WriteLine($"Computer chose {gestures[rnd - 1].move}");
-            return gestures[rnd - 1].move;
+            gesture = gestures[rnd - 1].move;
+        }
+
+        public override void GetName()
+        {
+            name = "Computer";
         }
 
     }
