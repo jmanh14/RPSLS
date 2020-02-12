@@ -13,7 +13,6 @@ namespace RockPaperScissorLizardSpock
         }
         public override void ChooseMove()
         {
-            //Console.Clear();
             for (int i = 0; i < gestures.Count; i++)
             {
                 Console.WriteLine($"[{i + 1}]{gestures[i].move}");
@@ -39,8 +38,6 @@ namespace RockPaperScissorLizardSpock
                 Console.WriteLine("Not a valid gesture");
                 ChooseMove();
             }
-            
-            
             
         }
         public override void GetName()

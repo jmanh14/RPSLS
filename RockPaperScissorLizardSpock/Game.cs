@@ -25,9 +25,7 @@ namespace RockPaperScissorLizardSpock
             {
                 Console.WriteLine("Invalid input. Try again");
                 Console.Write(">> ");
-                int choice = int.Parse(Console.ReadLine());
-                Console.Clear();
-                return choice;
+                return GetNumberOfPlayers();
             }
         }
       
@@ -286,7 +284,6 @@ namespace RockPaperScissorLizardSpock
                 Console.WriteLine("TIE!?!");
             }
             Console.ResetColor();
-        }
-      
+        }       
     }
 }
