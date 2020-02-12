@@ -49,7 +49,7 @@ namespace RockPaperScissorLizardSpock
                 Console.WriteLine($"Hello {name}.");
             }
         }
-        public void GetMove()
+        public int GetMove()
         {
             for (int i = 0; i < playerOne.gestures.Count; i++)
             {
@@ -57,30 +57,50 @@ namespace RockPaperScissorLizardSpock
             }
             Console.WriteLine("Enter your move");
             Console.Write(">> ");
+            int playerChoice = int.Parse(Console.ReadLine());
+            return playerChoice;
         }
         public void PlayGame(int selection)
         {
+           
+            string humanMove;
+            string computerMove;
+            //Console.Clear();
+            int choice;
+            int choiceTwo;
             if (selection == 1)
             {
                 playerTwo = new Computer();
+                choice = GetMove();
+                choiceTwo = 1;
             }
             else
             {
                 GetName();
                 playerTwo = new Human();
-                GetMove();
-                int playerTwoChoice = int.Parse(Console.ReadLine());
+                choice = GetMove();
+                choiceTwo = GetMove();
             }
-            string humanMove;
-            string computerMove;
-            //Console.Clear();
-            GetMove();
-            int playerOneChoice = int.Parse(Console.ReadLine());
-            humanMove = playerOne.ChooseMove(playerOneChoice);
-            computerMove = playerTwo.ChooseMove(playerOneChoice);
-            CompareMoves(humanMove, computerMove);
+            while (playerOne.score < 3 && playerTwo.score < 3)
+            {               
+                humanMove = playerOne.ChooseMove(choice);
+                computerMove = playerTwo.ChooseMove(choiceTwo);
+                CompareMoves(humanMove, computerMove);
+                Console.WriteLine($"{playerOne.score} - {playerTwo.score}");
+                
+                Console.WriteLine("Press enter to continue...");
+                Console.WriteLine();
+            }
+            if (playerOne.score == 3)
+            {
+                Console.WriteLine($"{playerOne.name} wins {playerOne.score} - {playerTwo.score}");
+            }
+            else if (playerTwo.score == 3)
+            {
+                Console.WriteLine($"{playerTwo.name} wins {playerOne.score} - {playerTwo.score}");
+            }
             Console.ReadLine();
-            
+
         }
 
         public void CompareMoves(string humanMove, string computerMove)
@@ -96,53 +116,135 @@ namespace RockPaperScissorLizardSpock
                 else
                 {
                     Console.WriteLine($"{computerMove} crushes {humanMove}");
+                    playerTwo.score++;
                 }
                 
             }
             //Scissors cuts paper
             else if ((humanMove == "Scissors" && computerMove == "Paper") || (computerMove == "Scissors" && humanMove == "Paper"))
             {
-                Console.WriteLine("Scissors cuts paper");
+                if(humanMove == "Scissors")
+                {
+                    Console.WriteLine($"{humanMove} cuts {computerMove}");
+                    playerOne.score++;
+                }
+                else
+                {
+                    Console.WriteLine($"{computerMove} cuts {humanMove}");
+                    playerTwo.score++;
+                }
             }
             //Paper covers rock
             else if ((humanMove == "Paper" && computerMove == "Rock") || (computerMove == "Paper" && humanMove == "Rock"))
             {
-                Console.WriteLine("Paper covers rock");
+                if (humanMove == "Paper")
+                {
+                    Console.WriteLine($"{humanMove} covers {computerMove}");
+                    playerOne.score++;
+                }
+                else
+                {
+                    Console.WriteLine($"{computerMove} covers {humanMove}");
+                    playerTwo.score++;
+                }
             }
             //Rock crushes lizard
             else if ((humanMove == "Rock" && computerMove == "Lizard") || (computerMove == "Rock" && humanMove == "Lizard"))
             {
-                Console.WriteLine("Rock crushes lizard");
+                if (humanMove == "Rock")
+                {
+                    Console.WriteLine($"{humanMove} crushes {computerMove}");
+                    playerOne.score++;
+                }
+                else
+                {
+                    Console.WriteLine($"{computerMove} crushes {humanMove}");
+                    playerTwo.score++;
+                }
             }
             //Lizard poisons spock
             else if ((humanMove == "Lizard" && computerMove == "Spock") || (computerMove == "Lizard" && humanMove == "Spock"))
             {
-                Console.WriteLine("Lizard poisons Spock");
+                if (humanMove == "Lizard")
+                {
+                    Console.WriteLine($"{humanMove} poisons {computerMove}");
+                    playerOne.score++;
+                }
+                else
+                {
+                    Console.WriteLine($"{computerMove} poisons {humanMove}");
+                    playerTwo.score++;
+                }
             }
             //Spock smashes scissors
             else if ((humanMove == "Spock" && computerMove == "Scissors") || (computerMove == "Spock" && humanMove == "Scissors"))
             {
-                Console.WriteLine("Spock smashes scissors");
+                if (humanMove == "Spock")
+                {
+                    Console.WriteLine($"{humanMove} smashes {computerMove}");
+                    playerOne.score++;
+                }
+                else
+                {
+                    Console.WriteLine($"{computerMove} smashes {humanMove}");
+                    playerTwo.score++;
+                }
             }
             //Scissors decapitates lizard
             else if ((humanMove == "Scissors" && computerMove == "Lizard") || (computerMove == "Scissors" && humanMove == "Lizard"))
             {
-                Console.WriteLine("Scissors decapitates lizard");
+                if (humanMove == "Scissors")
+                {
+                    Console.WriteLine($"{humanMove} decapitates {computerMove}");
+                    playerOne.score++;
+                }
+                else
+                {
+                    Console.WriteLine($"{computerMove} decapitates {humanMove}");
+                    playerTwo.score++;
+                }
             }
             //Lizard eats paper
             else if ((humanMove == "Lizard" && computerMove == "Paper") || (computerMove == "Lizard" && humanMove == "Paper"))
             {
-                Console.WriteLine("Lizard eats paper");
+                if (humanMove == "Lizard")
+                {
+                    Console.WriteLine($"{humanMove} eats {computerMove}");
+                    playerOne.score++;
+                }
+                else
+                {
+                    Console.WriteLine($"{computerMove} eats {humanMove}");
+                    playerTwo.score++;
+                }
             }
             //Paper disproves Spock
             else if ((humanMove == "Paper" && computerMove == "Spock") || (computerMove == "Paper" && humanMove == "Spock"))
             {
-                Console.WriteLine("Paper disproves Spock");
+                if (humanMove == "Paper")
+                {
+                    Console.WriteLine($"{humanMove} disproves {computerMove}");
+                    playerOne.score++;
+                }
+                else
+                {
+                    Console.WriteLine($"{computerMove} disproves {humanMove}");
+                    playerTwo.score++;
+                }
             }
             //Spock vaporizes Rock
             else if ((humanMove == "Spock" && computerMove == "Rock") || (computerMove == "Spock" && humanMove == "Rock"))
             {
-                Console.WriteLine("Spock vaporizes rock");
+                if (humanMove == "Spock")
+                {
+                    Console.WriteLine($"{humanMove} vaporizes {computerMove}");
+                    playerOne.score++;
+                }
+                else
+                {
+                    Console.WriteLine($"{computerMove} vaporizes {humanMove}");
+                    playerTwo.score++;
+                }
             }
            else
             {
