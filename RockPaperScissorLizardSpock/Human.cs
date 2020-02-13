@@ -11,9 +11,9 @@ namespace RockPaperScissorLizardSpock
         public Human()
         {
         }
-        public override void ChooseMove()
+
+        private void PrintGestures()
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
             for (int i = 0; i < gestures.Count; i++)
             {
                 Console.WriteLine($"[{i + 1}]{gestures[i].move}");
@@ -21,6 +21,11 @@ namespace RockPaperScissorLizardSpock
             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~");
             Console.WriteLine($"Choose a gesture, {name}: ");
             Console.Write(">> ");
+        }
+        public override void ChooseMove()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            PrintGestures();
             gesture = Console.ReadLine();
             try
             {

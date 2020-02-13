@@ -11,6 +11,7 @@ namespace RockPaperScissorLizardSpock
         public Player playerOne;
         public Player playerTwo;
 
+
         private int GetNumberOfPlayers()
         {
             Console.WriteLine("Would you like to play [1]Single Player or [2]Multiplayer");
@@ -19,7 +20,16 @@ namespace RockPaperScissorLizardSpock
             {
                 int choice = int.Parse(Console.ReadLine());
                 Console.Clear();
-                return choice;
+                if (choice != 1 && choice != 2 && choice != 3)
+                {
+                    Console.WriteLine("There are only 2 game modes!");
+                    Console.WriteLine("Press enter to continue...");
+                    return GetNumberOfPlayers();
+                }
+                else
+                {
+                    return choice;
+                }               
             }
             catch (FormatException)
             {
@@ -31,21 +41,25 @@ namespace RockPaperScissorLizardSpock
       
         private void SetPlayers(int numOfPlayers)
         {
+            Random rand = new Random();
             if (numOfPlayers == 1)
             {
                 playerOne = new Human();
-                playerTwo = new Computer();
+                playerTwo = new Computer(rand);
             }
             else if (numOfPlayers == 2)
             {
                 playerOne = new Human();
                 playerTwo = new Human();
             }
+            else if (numOfPlayers == 3)
+            {
+                playerOne = new Computer(rand);
+                playerTwo = new Computer(rand);
+            } 
             else
             {
-                Console.WriteLine("There are only 3 game modes!");
-                Console.WriteLine("Press enter to continue...");
-                Console.ReadLine();
+            
                 PlayGame();
             }
         }
@@ -106,14 +120,12 @@ namespace RockPaperScissorLizardSpock
             if (playerOne.score == 3)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"{playerOne.name} wins {playerOne.score} - {playerTwo.score}");
-                Console.ResetColor();
+                Console.WriteLine($"{playerOne.name} wins {playerOne.score} - {playerTwo.score}");  
             }
             else if (playerTwo.score == 3)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"{playerTwo.name} wins {playerOne.score} - {playerTwo.score}");
-                Console.ResetColor();
             }
         }
         public void PlayGame()
@@ -135,7 +147,7 @@ namespace RockPaperScissorLizardSpock
                     playerTwo.ChooseMove();
                     DisplayScore();
                     DisplayChoice();
-                    CompareMoves(playerOne.gesture, playerTwo.gesture);
+                    CompareMoves();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Press enter to continue...");
                     Console.ReadLine();   
@@ -149,156 +161,51 @@ namespace RockPaperScissorLizardSpock
             }
         }
 
-        private void CompareMoves(string playerOneMove, string playerTwoMove)
+        private void CompareMoves()
         {
-           //Rock crushes scissors
-           if ((playerOneMove == "Rock" && playerTwoMove == "Scissors") || (playerTwoMove == "Rock" && playerOneMove == "Scissors"))
-            {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("Rock crushes Scissors");
-                if (playerOneMove == "Rock")
-                {
-                    playerOne.score++;
-                }
-                else
-                {
-                    playerTwo.score++;
-                }
-                
-            }
-            //Scissors cuts paper
-            else if ((playerOneMove == "Scissors" && playerTwoMove == "Paper") || (playerTwoMove == "Scissors" && playerOneMove == "Paper"))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Scissors cuts Paper");
-                if (playerOneMove == "Scissors")
-                {
-                    playerOne.score++;
-                }
-                else
-                {
-                    playerTwo.score++;
-                }
-            }
-            //Paper covers rock
-            else if ((playerOneMove == "Paper" && playerTwoMove == "Rock") || (playerTwoMove == "Paper" && playerOneMove == "Rock"))
-            {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Paper covers Rock");
-                if (playerOneMove == "Paper")
-                {
-                    playerOne.score++;
-                }
-                else
-                {
-                    playerTwo.score++;
-                }
-            }
-            //Rock crushes lizard
-            else if ((playerOneMove == "Rock" && playerTwoMove == "Lizard") || (playerTwoMove == "Rock" && playerOneMove == "Lizard"))
-            {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("Rock crushes Lizard");
-                if (playerOneMove == "Rock")
-                {
-                    playerOne.score++;
-                }
-                else
-                {
-                    playerTwo.score++;
-                }
-            }
-            //Lizard poisons spock
-            else if ((playerOneMove == "Lizard" && playerTwoMove == "Spock") || (playerTwoMove == "Lizard" && playerOneMove == "Spock"))
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Lizard poisons Spock");
-                if (playerOneMove == "Lizard")
-                {
-                    playerOne.score++;
-                }
-                else
-                {
-                    playerTwo.score++;
-                }
-            }
-            //Spock smashes scissors
-            else if ((playerOneMove == "Spock" && playerTwoMove == "Scissors") || (playerTwoMove == "Spock" && playerOneMove == "Scissors"))
-            {
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("Spock smashes Scissors");
-                if (playerOneMove == "Spock")
-                {
-                    playerOne.score++;
-                }
-                else
-                {
-                    playerTwo.score++;
-                }
-            }
-            //Scissors decapitates lizard
-            else if ((playerOneMove == "Scissors" && playerTwoMove == "Lizard") || (playerTwoMove == "Scissors" && playerOneMove == "Lizard"))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Scissors decapitates Lizard");
-                if (playerOneMove == "Scissors")
-                {
-                    playerOne.score++;
-                }
-                else
-                {
-                    playerTwo.score++;
-                }
-            }
-            //Lizard eats paper
-            else if ((playerOneMove == "Lizard" && playerTwoMove == "Paper") || (playerTwoMove == "Lizard" && playerOneMove == "Paper"))
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Lizard eats Paper");
-                if (playerOneMove == "Lizard")
-                {
-                    playerOne.score++;
-                }
-                else
-                {
-                    playerTwo.score++;
-                }
-            }
-            //Paper disproves Spock
-            else if ((playerOneMove == "Paper" && playerTwoMove == "Spock") || (playerTwoMove == "Paper" && playerOneMove == "Spock"))
-            {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Paper disproves Spock");
-                if (playerOneMove == "Paper")
-                {
-                    playerOne.score++;
-                }
-                else
-                {
-                    playerTwo.score++;
-                }
-            }
-            //Spock vaporizes Rock
-            else if ((playerOneMove == "Spock" && playerTwoMove == "Rock") || (playerTwoMove == "Spock" && playerOneMove == "Rock"))
-            {
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("Spock vaporizes Rock");
-                if (playerOneMove == "Spock")
-                {
-                    playerOne.score++;
-                }
-                else
-                {
-
-                    playerTwo.score++;
-                }
-            }
-           else
+            Console.ForegroundColor = ConsoleColor.Green;
+            //Rock crushes scissors / Rock crushes lizard
+            if (playerOne.gesture == playerTwo.gesture)
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("TIE!?!");
             }
-            Console.ResetColor();
+            else if (playerOne.gesture == "Rock" && (playerTwo.gesture == "Scissors" || playerTwo.gesture == "Lizard"))
+            {
+                Console.WriteLine($"{playerOne.gesture} beats {playerTwo.gesture}");
+                playerOne.score++;
+
+            }
+            //Scissors cuts paper / Scissors decapitates lizard
+            else if (playerOne.gesture == "Scissors" && (playerTwo.gesture == "Paper" || playerTwo.gesture == "Lizard"))
+            {   
+                Console.WriteLine($"{playerOne.gesture} beats {playerTwo.gesture}");
+                playerOne.score++;
+            }
+            //Paper covers rock / Paper disproves spock
+            else if (playerOne.gesture == "Paper" && (playerTwo.gesture == "Rock" || playerTwo.gesture == "Spock"))
+            {
+                Console.WriteLine($"{playerOne.gesture} beats {playerTwo.gesture}");
+                playerOne.score++;
+            }
+            //Lizard poisons spock / Lizard eats paper
+            else if (playerOne.gesture == "Lizard" && (playerTwo.gesture == "Spock" || playerTwo.gesture == "Paper"))
+            {
+                Console.WriteLine($"{playerOne.gesture} beats {playerTwo.gesture}");
+                playerOne.score++;
+            }
+            //Spock smashes scissors / Spock vaporizes rock
+            else if (playerOne.gesture == "Spock" && (playerTwo.gesture == "Scissors" || playerTwo.gesture == "Rock"))
+            {
+                Console.WriteLine($"{playerOne.gesture} beats {playerTwo.gesture}");
+                playerOne.score++;
+            }
+           else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{playerTwo.gesture} beats {playerOne.gesture}");
+                playerTwo.score++; 
+            }
         }       
     }
 }
