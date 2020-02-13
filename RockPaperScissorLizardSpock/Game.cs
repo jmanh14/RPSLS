@@ -86,51 +86,63 @@ namespace RockPaperScissorLizardSpock
         private void DisplayScore()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{playerOne.name} vs {playerTwo.name}");
             Console.WriteLine("=======================");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"{playerOne.score} - {playerTwo.score}");
-            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~");
+        }
+
+        private void DisplayChoice()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"{playerOne.name} chose {playerOne.gesture}");
+            Console.WriteLine($"{playerTwo.name} chose {playerTwo.gesture}");
+        }
+        private void DisplayWinner() 
+        {
+            if (playerOne.score == 3)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{playerOne.name} wins {playerOne.score} - {playerTwo.score}");
+                Console.ResetColor();
+            }
+            else if (playerTwo.score == 3)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{playerTwo.name} wins {playerOne.score} - {playerTwo.score}");
+                Console.ResetColor();
+            }
         }
         public void PlayGame()
         {
             string yesOrNo = "y";
             DisplayRules();
             while (yesOrNo == "y" || yesOrNo == "Y")
-            { 
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 int players = GetNumberOfPlayers();
                 SetPlayers(players);
                 playerOne.GetName();
                 playerTwo.GetName();
                 while (playerOne.score < 3 && playerTwo.score < 3)
-                {
-                    
+                {              
                     DisplayScore();
                     playerOne.ChooseMove();
                     DisplayScore();
                     playerTwo.ChooseMove();
                     DisplayScore();
-                    Console.WriteLine($"{playerOne.name} chose {playerOne.gesture}");
-                    Console.WriteLine($"{playerTwo.name} chose {playerTwo.gesture}");
+                    DisplayChoice();
                     CompareMoves(playerOne.gesture, playerTwo.gesture);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Press enter to continue...");
                     Console.ReadLine();   
                 }
-                if (playerOne.score == 3)
-                {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"{playerOne.name} wins {playerOne.score} - {playerTwo.score}");
-                    Console.ResetColor();
-                }
-                else if (playerTwo.score == 3)
-                {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"{playerTwo.name} wins {playerOne.score} - {playerTwo.score}");
-                    Console.ResetColor();
-                }
+                Console.Clear();
+                DisplayWinner();
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Play again? [Y/N]");
                 Console.Write(">> ");
                 yesOrNo = Console.ReadLine();
@@ -283,7 +295,7 @@ namespace RockPaperScissorLizardSpock
             }
            else
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("TIE!?!");
             }
             Console.ResetColor();

@@ -13,6 +13,7 @@ namespace RockPaperScissorLizardSpock
         }
         public override void ChooseMove()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             for (int i = 0; i < gestures.Count; i++)
             {
                 Console.WriteLine($"[{i + 1}]{gestures[i].move}");
