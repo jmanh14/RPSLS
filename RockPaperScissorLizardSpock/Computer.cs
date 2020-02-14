@@ -18,7 +18,7 @@ namespace RockPaperScissorLizardSpock
         public override void ChooseMove()
         {
             int rnd = this.rnd.Next(1, 6);
-            gesture = gestures[rnd - 1].move;
+            gesture = gestures[rnd -1].move;
         }
 
         public override void GetName()
